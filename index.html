@@ -373,5 +373,86 @@ textarea {
   </div>
 </div>
 
-</body>
+  <script>
+    let confirmCallback = null;
+const textarea = document.getElementById("holidayText");
+const previewText = document.getElementById("flexPreviewText");
+
+textarea.addEventListener("input", () => {
+  previewText.textContent =
+    textarea.value.trim() || "(ข้อความวันหยุดจะแสดงตรงนี้)";
+});
+
+// ===== ส่งทดสอบ =====
+function sendTest() {
+  const text = textarea.value.trim();
+  if (!text) {
+    showToast("กรุณากรอกข้อความวันหยุด");
+    return;
+  }
+
+  google.script.run
+    .withSuccessHandler(res => {
+      showToast("ส่งทดสอบเรียบร้อย");
+    })
+    .withFailureHandler(err => {
+      showToast(err.message || "เกิดข้อผิดพลาด");
+    })
+    .sendTestHolidayMessage(text);
+}
+
+// ===== ส่งจริง =====
+function sendLive() {
+  const text = textarea.value.trim();
+  if (!text) {
+    showToast("กรุณากรอกข้อความวันหยุด");
+    return;
+  }
+
+  openConfirmModal(() => {
+    google.script.run
+      .withSuccessHandler(res => {
+        showToast("ส่งแจ้งเตือนเรียบร้อย");
+      })
+      .withFailureHandler(err => {
+        showToast(err.message || "เกิดข้อผิดพลาด");
+      })
+      .sendHolidayMessage(text);
+  });
+}
+
+// ===== Toast =====
+function showToast(msg) {
+  const toast = document.getElementById("toast");
+  toast.textContent = msg;
+  toast.classList.remove("hidden");
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+    toast.classList.add("hidden");
+  }, 3000);
+}
+
+    function openConfirmModal(cb) {
+  confirmCallback = cb;
+  document.getElementById("agreeCheck").checked = false;
+  document.getElementById("modalConfirmBtn").disabled = true;
+  document.getElementById("confirmModal").classList.remove("hidden");
+}
+
+function closeModal() {
+  document.getElementById("confirmModal").classList.add("hidden");
+}
+
+document.getElementById("agreeCheck").addEventListener("change", e => {
+  document.getElementById("modalConfirmBtn").disabled = !e.target.checked;
+});
+
+document.getElementById("modalConfirmBtn").addEventListener("click", () => {
+  closeModal();
+  if (confirmCallback) confirmCallback();
+});
+    </script>
+  </body>
 </html>
