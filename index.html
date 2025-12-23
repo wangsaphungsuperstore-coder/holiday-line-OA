@@ -7,16 +7,17 @@
   <title>แจ้งวันหยุด</title>
 
   <style>
-    body {
-      font-family: system-ui, sans-serif;
-      background: #fff7d1;
-      padding: 16px;
-    }
 
-    html {
+body {
+    font-family: system-ui, sans-serif;
+  max-width: 420px;   /* พอดี iPhone */
+  margin: 0 auto;
+}
+
+html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  font-size: 18px;
+  font-size: 16px;   /* ฐานมาตรฐาน */
 }
  textarea {
   width: 60%;
@@ -225,16 +226,11 @@
   display: none;
 }
 
-    @media (max-width: 768px) {
-  body {
-    transform: scale(1.25);
-    transform-origin: top center;
-  }
-
+@media (max-width: 768px) {
   html {
-    font-size: 22px;   /* 🔥 ฐานใหญ่ทั้งเว็บ */
+    font-size: 17px;   /* พออ่านสบาย ไม่ล้น */
   }
-
+}
  
   textarea {
     width: 100%;
@@ -242,25 +238,30 @@
     font-size: 1.2rem;
   }
 
-  .flex-preview {
-    max-width: 100%;
-    border-radius: 1.2rem;
-  }
+.flex-preview {
+  max-width: 100%;
+  margin: 20px auto;
+  border-radius: 20px;
+}
 
-  .flex-title {
-    font-size: 2rem;
-  }
+.flex-header {
+  padding: 24px 20px;
+}
 
-  .flex-text {
-    font-size: 1.6rem;
-    line-height: 1.7;
-  }
+.flex-title {
+  font-size: 1.6rem;   /* ≈ 26px */
+}
 
-  .btn {
-    width: 100%;
-    font-size: 1.3rem;
-    padding: 1rem;
-  }
+.flex-text {
+  font-size: 1.4rem;   /* ≈ 22px */
+  line-height: 1.6;
+}
+
+.btn {
+  width: 100%;
+  font-size: 1.1rem;
+  padding: 14px;
+}
 } 
   </style>
 </head>
