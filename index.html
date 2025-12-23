@@ -21,6 +21,8 @@ html {
   text-size-adjust: 100%;
   font-size: 15px;   /* 🔥 ลดจาก 16–18 ลง */
 }
+
+
     
  textarea {
   width: 60%;
@@ -230,18 +232,20 @@ html {
 }
 
 @media (max-width: 768px) {
-  html {
-    font-size: 15px;   /* คงที่ ไม่ดันเพิ่ม */
-  }
- 
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 textarea {
   width: 100%;
-  min-height: 140px;
-  padding: 14px;
-  font-size: 1rem;   /* ≈ 15px */
-  margin: 10px auto;
-  border-radius: 10px;
+  max-width: 100%;
 }
+  
 .flex-preview {
   max-width: 360px;
   margin: 16px auto;
