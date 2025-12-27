@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="th">
 <head>
   <base target="_top">
   <meta charset="UTF-8">
@@ -7,18 +7,18 @@
   <title>อัตราค่าปรับหอพัก</title>
   
   <style>
-    /* ใช้โทนสีและดีไซน์ตามไฟล์ต้นฉบับ [cite: 13-17] */
+    /* Configuration & Variables */
     :root {
-      --color-primary: #8B4513; /* น้ำตาลเข้ม [cite: 13] */
-      --color-secondary: #D2B48C; /* น้ำตาลอ่อน [cite: 14] */
-      --color-background: #FFF8E1; /* เหลืองอ่อน [cite: 15] */
-      --color-text: #4E342E; /* น้ำตาลเกือบดำ [cite: 16] */
-      --color-warning: #FFC107; /* เหลืองเตือน [cite: 34] */
-      --color-safe: #4CAF50; /* เขียวปลอดภัย [cite: 17] */
+      --color-primary: #8B4513;    /* น้ำตาลเข้ม */
+      --color-secondary: #D2B48C;  /* น้ำตาลอ่อน */
+      --color-background: #FFF8E1; /* เหลืองอ่อน */
+      --color-text: #4E342E;       /* น้ำตาลเกือบดำ */
+      --color-warning: #FFC107;    /* เหลืองเตือน */
+      --color-safe: #4CAF50;       /* เขียวปลอดภัย */
     }
     
     body {
-      font-family: 'Sukhumvit Set', 'Kanit', sans-serif; [cite: 18]
+      font-family: 'Sukhumvit Set', 'Kanit', sans-serif;
       background-color: var(--color-background);
       color: var(--color-text);
       padding: 15px;
@@ -27,34 +27,100 @@
     }
     
     .container {
-      max-width: 450px; [cite: 20]
+      max-width: 450px;
       margin: 0 auto;
       padding: 20px;
       background-color: white;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); [cite: 21]
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
-    h1 { color: var(--color-primary); font-size: 1.8em; margin-bottom: 5px; } [cite: 22]
-    h2 { font-size: 1.5em; margin-top: 25px; color: var(--color-primary); border-bottom: 2px solid var(--color-secondary); padding-bottom: 5px; } [cite: 23, 24]
+    h1 { 
+      color: var(--color-primary); 
+      font-size: 1.8em; 
+      margin-bottom: 5px; 
+    }
 
-    .date-display { font-size: 1.1em; color: #6D4C41; margin-bottom: 20px; } [cite: 25]
-    
-    .fine-box { background-color: white; padding: 20px; border-radius: 8px; margin: 25px 0; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); } [cite: 26, 27]
-    .fine-label { font-size: 1.1em; font-weight: 500; margin-bottom: 5px; } [cite: 28]
-    .fine-amount { font-size: 3.5em; font-weight: bold; color: #DC3545; line-height: 1; } [cite: 29, 30]
-    
-    .status-message { padding: 10px; margin-top: 15px; border-radius: 5px; font-weight: bold; font-size: 1.1em; } [cite: 32]
-    .status-safe { background-color: var(--color-safe); color: white; } [cite: 33]
-    .status-warning { background-color: var(--color-warning); color: var(--color-text); } [cite: 34]
+    h2 { 
+      font-size: 1.5em; 
+      margin-top: 25px; 
+      color: var(--color-primary); 
+      border-bottom: 2px solid var(--color-secondary); 
+      padding-bottom: 5px; 
+    }
 
-    .fine-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 1em; } [cite: 35]
-    .fine-table th, .fine-table td { border: 1px solid var(--color-secondary); padding: 10px 8px; } [cite: 36]
-    .fine-table th { background-color: var(--color-primary); color: white; } [cite: 37]
-    .fine-table tr:nth-child(even) { background-color: #FBEFDD; } [cite: 38]
-    .highlight-row { background-color: var(--color-warning) !important; font-weight: bold; } [cite: 39]
+    .date-display { 
+      font-size: 1.1em; 
+      color: #6D4C41; 
+      margin-bottom: 20px; 
+    }
     
-    /* Responsive สำหรับมือถือตามต้นฉบับ [cite: 40-52] */
+    .fine-box { 
+      background-color: white; 
+      padding: 20px; 
+      border-radius: 8px; 
+      margin: 25px 0; 
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
+    }
+
+    .fine-label { 
+      font-size: 1.1em; 
+      font-weight: 500; 
+      margin-bottom: 5px; 
+    }
+
+    .fine-amount { 
+      font-size: 3.5em; 
+      font-weight: bold; 
+      color: #DC3545; 
+      line-height: 1; 
+    }
+    
+    .status-message { 
+      padding: 10px; 
+      margin-top: 15px; 
+      border-radius: 5px; 
+      font-weight: bold; 
+      font-size: 1.1em; 
+    }
+
+    .status-safe { 
+      background-color: var(--color-safe); 
+      color: white; 
+    }
+
+    .status-warning { 
+      background-color: var(--color-warning); 
+      color: var(--color-text); 
+    }
+
+    .fine-table { 
+      width: 100%; 
+      border-collapse: collapse; 
+      margin-top: 15px; 
+      font-size: 1em; 
+    }
+
+    .fine-table th, .fine-table td { 
+      border: 1px solid var(--color-secondary); 
+      padding: 10px 8px; 
+    }
+
+    .fine-table th { 
+      background-color: var(--color-primary); 
+      color: white; 
+    }
+
+    .fine-table tr:nth-child(even) { 
+      background-color: #FBEFDD; 
+    }
+
+    .highlight-row { 
+      background-color: var(--color-warning) !important; 
+      font-weight: bold; 
+    }
+    
+    /* Responsive for Mobile */
     @media (max-width: 992px) {
       .container { max-width: 85%; }
       h1, h2, .date-display, .fine-label, .status-message, .fine-table { font-size: 3em; }
@@ -88,29 +154,34 @@
   </div>
 
   <script>
-    // รวม Logic การคำนวณจาก Code2.gs มาไว้ที่นี่เพื่อให้รันบน GitHub ได้ [cite: 3-11]
+    /**
+     * คํานวณข้อมูลค่าปรับ
+     * กฎ: เริ่มคิดค่าปรับตั้งแต่วันที่ 9 ของเดือน (วันละ 50 บาท)
+     */
     function getFineData() {
       const today = new Date();
-      const todayDate = today.getDate(); // วันที่ปัจจุบัน [cite: 3]
-      const fineRate = 50; // อัตราค่าปรับต่อวัน [cite: 3, 4]
+      const todayDate = today.getDate();
+      const fineRate = 50; 
       
       let currentFine = 0;
       if (todayDate >= 9) {
-        // เริ่มคิดค่าปรับหลังวันที่ 8 [cite: 5, 6]
         currentFine = (todayDate - 8) * fineRate;
       }
       
       const referenceTable = [];
-      for (let day = 9; day <= 16; day++) { [cite: 7]
+      for (let day = 9; day <= 16; day++) {
         referenceTable.push({
           day: day,
-          fine: (day - 8) * fineRate [cite: 8]
+          fine: (day - 8) * fineRate
         });
       }
 
-      // จัดรูปแบบวันที่ภาษาไทย [cite: 9, 10]
+      // จัดรูปแบบวันที่ภาษาไทย
       const formatter = new Intl.DateTimeFormat('th-TH', { 
-        year: 'numeric', month: 'long', day: 'numeric', weekday: 'long'
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric', 
+        weekday: 'long'
       });
       
       return {
@@ -120,18 +191,21 @@
       };
     }
 
+    /**
+     * แสดงผลข้อมูลบนหน้าเว็บ
+     */
     function displayData() {
       const data = getFineData();
       const todayDate = new Date().getDate();
       
-      // แสดงวันที่ [cite: 57]
+      // แสดงวันที่ปัจจุบัน
       document.getElementById('current-date').textContent = `ณ ${data.formattedDate}`;
       
-      // แสดงค่าปรับ [cite: 58]
+      // แสดงยอดค่าปรับ
       const fineAmountDisplay = document.getElementById('current-fine-amount');
       fineAmountDisplay.innerHTML = `${data.currentFine.toLocaleString('th-TH')}`;
       
-      // แสดงข้อความสถานะ [cite: 59-61]
+      // จัดการข้อความสถานะ
       const statusMessage = document.getElementById('status-message');
       if (data.currentFine === 0) {
           statusMessage.textContent = 'ชำระวันนี้ ไม่มีค่าปรับค่ะ';
@@ -141,7 +215,7 @@
           statusMessage.className = 'status-message status-warning';
       }
 
-      // แสดงตารางอ้างอิง [cite: 62-64]
+      // สร้างตารางอ้างอิง
       const tableBody = document.getElementById('reference-table-body');
       tableBody.innerHTML = '';
       
@@ -154,7 +228,7 @@
       });
     }
 
-    // เริ่มทำงานเมื่อโหลดหน้าเว็บ
+    // เริ่มทำงานเมื่อ DOM โหลดเสร็จสมบูรณ์
     document.addEventListener("DOMContentLoaded", displayData);
   </script>
 </body>
