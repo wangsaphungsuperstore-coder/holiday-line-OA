@@ -1,458 +1,301 @@
 <!DOCTYPE html>
-<html lang="th">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>แจ้งวันหยุด</title>
-
-  <style>
-
-body {
-  font-family: system-ui, sans-serif;
-  background: #FFF6CC;   /* ⭐ เหลืองอ่อน */
-  padding: 12px;
-  max-width: 420px;
-  margin: 0 auto;
-}
-
-html {
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-  font-size: 15px;   /* 🔥 ลดจาก 16–18 ลง */
-}
-
-
-    
- textarea {
-  width: 60%;
-  min-height: 130px;
-  padding: 16px;
-  font-size: 16px;
-
-  margin: 12px auto;   /* ⭐ ทำให้อยู่กึ่งกลาง */
-  display: block;      /* เผื่อกรณีโดน style อื่นทับ */
-}
-.section-divider {
-  border: none;
-  border-top: 1px solid #39bd55;
-  margin: 24px auto;
-  max-width: 450px;   /* เท่ากับ textarea / preview */
-}
-
-    .btn-row {
-  display: flex;
-  justify-content: center;   /* ⭐ อยู่กึ่งกลางหน้า */
-  gap: 50px;                 /* ระยะห่างระหว่างปุ่ม */
-  margin: 20px 0;
-}
-
-.btn {
-  padding: 10px 16px;
-  font-size: 18px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-   margin-top: 25px;
-
-  width: auto;               /* ⭐ พอดีกับข้อความ */
-  white-space: nowrap;       /* ⭐ ไม่ตัดบรรทัด */
-}
-
-.btn-test {
-  background: #777;
-  color: #fff;
-}
-
-.btn-live {
-  background: #0ead23;
-  color: #fff;
-}
-
-    .card {
-      background: none;
-      padding: 16px;
-      border-radius: 8px;
-      margin-top: 16px;
-    }
-    .disabled {
-      background: #ccc;
-    }
-
-#preview {
-  text-align: center;
-    margin-top: 25px;
-    color: #63400a;
-}
-
-
-#Webheader{
-  text-align: center;
-  color: #754c0e
-}
-
-
-.flex-preview {
-  max-width: 360px;
-  margin: 24px auto;
-  border-radius: 24px;              /* Flex bubble โค้งขึ้น */
-  overflow: hidden;
-  background: #FFF8F6;              /* 🔥 พื้นหลังแดงจาง */
-  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
-
-
-.flex-header {
-  background: #D65E5E;
-  padding: 32px 24px;
-}
-
-.flex-title {
-  font-weight: 800;
-  font-size: 32px;                  /* 🔥 ใหญ่ขึ้น */
-  color: #ffffff;
-  text-align: center;
-}
-
-.flex-sub {
-  font-size: 13px;
-  color: #FFE6D8;
-  margin-top: 6px;
-  text-align: right;
-}
-
-.flex-body {
-  background: #FFF8F6;              /* 🔥 ให้ตรงกับ Flex */
-  padding: 40px 24px;
-}
-
-.flex-text {
-  white-space: pre-wrap;
-  font-size: 26px;                  /* 🔥 ใหญ่ขึ้น */
-  line-height: 1.6;
-  color: #333333;
-  text-align: center;
-  font-weight: 800;
-}
-
-.flex-footer {
-  padding: 16px;
-  font-size: 13px;
-  text-align: center;
-  color: #888;
-  background: #FFF8F6;
-}
-
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-}
-
-.modal {
-  background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  max-width: 360px;
-  width: 90%;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-}
-
-.modal h3 {
-  margin-top: 0;
-  font-size: 18px;
-}
-
-.modal p {
-  font-size: 14px;
-  color: #444;
-}
-
-.checkbox {
-  display: flex;
-  gap: 8px;
-  margin: 14px 0;
-  font-size: 13px;
-}
-
-.modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-}
-
-.btn-cancel {
-  background: #eee;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-}
-
-.btn-confirm {
-  background: #ff5722;
-  color: #fff;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-}
-
-.btn-confirm:disabled {
-  opacity: 0.5;
-}
-
-.toast {
-  position: fixed;
-  bottom: 350px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #323232;
-  color: #fff;
-  padding: 10px 16px;
-  border-radius: 8px;
-  font-size: 14px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-  z-index: 1000;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  max-width: 90%;
-  text-align: center;
-}
-
-.toast.show {
-  opacity: 1;
-}
-
-.hidden {
-  display: none;
-}
-
-@media (max-width: 768px) {
-* {
-  box-sizing: border-box;
-}
-
-html, body {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-textarea {
-  width: 100%;
-  max-width: 100%;
-}
+  <base target="_top">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>อัตราค่าปรับหอพัก</title>
   
-.flex-preview {
-  max-width: 360px;
-  margin: 16px auto;
-  border-radius: 18px;
-  background: #FFF8F6;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
+  <style>
+    /* ------------------------------------- */
+    /* Mobile-First & Warm Color Design CSS  */
+    /* ------------------------------------- */
+    
+    :root {
+      --color-primary: #8B4513; /* น้ำตาลเข้ม (Accent) */
+      --color-secondary: #D2B48C; /* น้ำตาลอ่อน/แทน (Background Accent) */
+      --color-background: #FFF8E1; /* เหลืองอ่อนมาก (Warm White) */
+      --color-text: #4E342E; /* น้ำตาลเกือบดำ */
+      --color-warning: #FFC107; /* เหลืองเตือน */
+      --color-safe: #4CAF50; /* เขียวปลอดภัย */
+    }
+    
+    body {
+      font-family: 'Sukhumvit Set', 'Kanit', sans-serif; /* ฟอนต์ที่ดูดีในมือถือ */
+      background-color: var(--color-background);
+      color: var(--color-text);
+      padding: 15px;
+      margin: 0;
+      text-align: center;
+    }
+    
+    .container {
+      max-width: 450px; /* จำกัดความกว้างสำหรับมือถือ */
+      margin: 0 auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
 
-.flex-header {
-  background: #D65E5E;
-  padding: 20px 18px;   /* 🔥 ลด */
-}
+    h1 {
+      color: var(--color-primary);
+      font-size: 1.8em;
+      margin-bottom: 5px;
+    }
+    
+    h2 {
+      font-size: 1.5em;
+      margin-top: 25px;
+      color: var(--color-primary);
+      border-bottom: 2px solid var(--color-secondary);
+      padding-bottom: 5px;
+    }
 
-.flex-title {
-  font-weight: 700;
-  font-size: 1.4rem;   /* ≈ 21px */
-  color: #fff;
-  text-align: center;
+    .date-display {
+      font-size: 1.1em;
+      color: #6D4C41; /* น้ำตาลกลาง */
+      margin-bottom: 20px;
+    }
+    
+.fine-box {
+  background-color: white; /* เปลี่ยนเป็นสีขาวเพื่อให้สีแดงเด่นขึ้น */
+  color: var(--color-text);
+  padding: 20px;
+  border-radius: 8px;
+  margin: 25px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* เพิ่มเงาให้ดูมีมิติมากขึ้น */
 }
+    
+    .fine-label {
+      font-size: 1.1em;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+    
+.fine-amount {
+  font-size: 3.5em; /* ตัวเลขใหญ่สำหรับมือถือ */
+  font-weight: bold;
+  color: #DC3545; /* สีแดงเข้ม (Danger Red) */
+  line-height: 1;
+}
+    
+    .fine-unit {
+      font-size: 1.5em;
+      font-weight: 500;
+      display: block;
+    }
+    
+    .status-message {
+        padding: 10px;
+        margin-top: 15px;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 1.1em;
+    }
 
-.flex-sub {
-  font-size: 0.8rem;   /* ≈ 12px */
-  color: #FFE6D8;
-  margin-top: 4px;
-  text-align: right;
-}
+    .status-safe {
+        background-color: var(--color-safe);
+        color: white;
+    }
 
-  .flex-body {
-  padding: 22px 18px;
-}
-
-.flex-text {
-  font-size: 1.25rem;  /* ≈ 18–19px */
-  line-height: 1.6;
-  font-weight: 700;
-  text-align: center;
-  color: #333;
-}
-.flex-footer {
-  padding: 12px;
-  font-size: 0.8rem;
-  color: #888;
-  text-align: center;
-}
+    .status-warning {
+        background-color: var(--color-warning);
+        color: var(--color-text);
+    }
 
 
-  .btn-row {
-  gap: 12px;
-  margin-top: 16px;
+    /* ตารางอ้างอิง */
+    .fine-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      font-size: 1em;
+    }
+    
+    .fine-table th, .fine-table td {
+      border: 1px solid var(--color-secondary);
+      padding: 10px 8px;
+    }
+    
+    .fine-table th {
+      background-color: var(--color-primary);
+      color: white;
+      font-weight: bold;
+    }
+    
+    .fine-table tr:nth-child(even) {
+      background-color: #FBEFDD; /* เหลืองอ่อนสลับแถว */
+    }
+    
+    /* เน้นวันที่ปัจจุบันในตาราง (ถ้ามี) */
+    .highlight-row {
+      background-color: var(--color-warning) !important;
+      font-weight: bold;
+      color: var(--color-text);
+    }
+    
+    @media (max-width: 992px) {
+   html, body {
+   width: 100%;
 }
+    .container {
+      max-width: 85%; /* จำกัดความกว้างสำหรับมือถือ */
+      margin: 0 auto;
+    }
 
-.btn {
-  width: 100%;
-  font-size: 1rem;     /* ≈ 15px */
-  padding: 12px;
-  border-radius: 10px;
+    h1 {
+      color: var(--color-primary);
+      font-size: 3em;
+      margin-bottom: 5px;
+    }
+    
+    h2 {
+      font-size: 3em;
+      margin-top: 25px;
+      padding-bottom: 5px;
+    }
+
+    .date-display {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+    
+.fine-box {
+  padding: 20px;
+  border-radius: 8px;
+  margin: 25px 0;
 }
-} 
+    
+    .fine-label {
+      font-size: 3em;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+    
+.fine-amount {
+  font-size: 6em; /* ตัวเลขใหญ่สำหรับมือถือ */
+  font-weight: bold;
+  line-height: 1;
+}
+    
+    .fine-unit {
+      font-size: 3em;
+      font-weight: 500;
+      display: block;
+    }
+    
+    .status-message {
+        padding: 10px;
+        margin-top: 15px;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 3em;
+    }
+
+
+
+    /* ตารางอ้างอิง */
+    .fine-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 35px;
+      font-size: 3em;
+    }
+    
+    .fine-table th, .fine-table td {
+      border: 1px solid var(--color-secondary);
+      padding: 10px 8px;
+    }
+    }
+
   </style>
 </head>
 <body>
 
- <h2 id="Webheader">ประกาศวันหยุดร้านวังซุป</h2>
-<hr class="section-divider">
+  <div class="container">
+    
+    <h1>อัตราค่าปรับ</h1>
+    
+    <div class="date-display" id="current-date">
+      </div>
 
-  <textarea id="holidayText"
-    placeholder="พิมพ์วันหยุด เช่น&#10;วันที่ 5 ธันวาคม หยุด 1 วัน&#10;วันที่ 12–13 มกราคม"></textarea>
-
-
-<div class="card" id="preview">
-  <strong>ตัวอย่างข้อความ</strong>
-</div>
-
-<div class="flex-preview">
-  <div class="flex-header">
-    <div class="flex-title">🗓️ แจ้งวันหยุด</div>
-    <div class="flex-sub">—— ร้านวังซุป</div>
-  </div>
-
-  <div class="flex-body">
-    <div id="flexPreviewText" class="flex-text">
-      (ข้อความวันหยุดจะแสดงตรงนี้)
+    <div class="fine-box">
+      <div class="fine-label">ค่าปรับที่ต้องชำระในวันนี้ (฿)</div>
+      <div class="fine-amount" id="current-fine-amount">
+        </div>
     </div>
+    
+    <div class="status-message" id="status-message">
+        </div>
+    
+    <h2>ตารางอ้างอิง</h2>
+    <table class="fine-table">
+      <thead>
+        <tr>
+          <th>ชำระภายในวันที่</th>
+          <th>ค่าปรับ (บาท)</th>
+        </tr>
+      </thead>
+      <tbody id="reference-table-body">
+        </tbody>
+    </table>
+    
   </div>
-
-  <div class="flex-footer">
-    ขออภัยในความไม่สะดวกค่ะ 🙏
-  </div>
-</div>
-
-<div class="btn-row">
-  <button id="sendTestBtn" onclick="sendTest()" class="btn btn-test">
-    ส่งทดสอบ
-  </button>
-
-  <button id="sendLiveBtn" onclick="sendLive()" class="btn btn-live">
-    🔔 ส่งแจ้งเตือนจริง
-  </button>
-</div>
-
-
-<div id="toast" class="toast hidden"></div>
-
-<div id="confirmModal" class="modal-overlay hidden">
-  <div class="modal">
-    <h3 id="modalTitle">ยืนยันการส่งข้อความ</h3>
-
-    <p id="modalMessage">
-      ระบบจะส่งข้อความนี้ไปยังผู้รับ กรุณาตรวจสอบให้แน่ใจก่อนดำเนินการ
-    </p>
-
-    <label class="checkbox">
-      <input type="checkbox" id="agreeCheck">
-      <span>ฉันตรวจสอบข้อความเรียบร้อยแล้ว และยืนยันการส่ง</span>
-    </label>
-
-    <div class="modal-actions">
-      <button onclick="closeModal()" class="btn-cancel">
-        ยกเลิก
-      </button>
-      <button id="modalConfirmBtn" class="btn-confirm" disabled>
-        ✔ ยืนยันส่ง
-      </button>
-    </div>
-  </div>
-</div>
 
   <script>
-    let confirmCallback = null;
-const textarea = document.getElementById("holidayText");
-const previewText = document.getElementById("flexPreviewText");
+    document.addEventListener("DOMContentLoaded", function() {
+      // เรียกฟังก์ชันใน Code.gs เพื่อดึงข้อมูล
+      google.script.run
+        .withSuccessHandler(displayData)
+        .getFineData();
+    });
 
-textarea.addEventListener("input", () => {
-  previewText.textContent =
-    textarea.value.trim() || "(ข้อความวันหยุดจะแสดงตรงนี้)";
-});
+    /**
+     * ฟังก์ชันแสดงผลข้อมูลที่ได้จาก Google Apps Script
+     * @param {object} data - ข้อมูลที่ส่งกลับมาจาก getFineData()
+     */
+    function displayData(data) {
+      const today = new Date();
+      const todayDate = today.getDate();
+      
+      // 1. แสดงวันที่ปัจจุบัน
+      document.getElementById('current-date').textContent = `ณ ${data.formattedDate}`;
+      
+      // 2. แสดงค่าปรับหลัก
+      const fineAmountDisplay = document.getElementById('current-fine-amount');
+      fineAmountDisplay.innerHTML = `${data.currentFine.toLocaleString('th-TH')}`;
+      
+      // 3. แสดงข้อความสถานะ
+      const statusMessage = document.getElementById('status-message');
+      if (data.currentFine === 0) {
+          statusMessage.textContent = 'ชำระวันนี้ ไม่มีค่าปรับค่ะ';
+          statusMessage.classList.add('status-safe');
+      } else {
+          statusMessage.textContent = `ชำระวันนี้ มีค่าปรับรวม ${data.currentFine.toLocaleString('th-TH')} บาทค่ะ`;
+          statusMessage.classList.add('status-warning');
+      }
 
-// ===== ส่งทดสอบ =====
-function sendTest() {
-  const text = textarea.value.trim();
-  if (!text) {
-    showToast("กรุณากรอกข้อความวันหยุด");
-    return;
-  }
-
-  google.script.run
-    .withSuccessHandler(res => {
-      showToast("ส่งทดสอบเรียบร้อย");
-    })
-    .withFailureHandler(err => {
-      showToast(err.message || "เกิดข้อผิดพลาด");
-    })
-    .sendTestHolidayMessage(text);
-}
-
-// ===== ส่งจริง =====
-function sendLive() {
-  const text = textarea.value.trim();
-  if (!text) {
-    showToast("กรุณากรอกข้อความวันหยุด");
-    return;
-  }
-
-  openConfirmModal(() => {
-    google.script.run
-      .withSuccessHandler(res => {
-        showToast("ส่งแจ้งเตือนเรียบร้อย");
-      })
-      .withFailureHandler(err => {
-        showToast(err.message || "เกิดข้อผิดพลาด");
-      })
-      .sendHolidayMessage(text);
-  });
-}
-
-// ===== Toast =====
-function showToast(msg) {
-  const toast = document.getElementById("toast");
-  toast.textContent = msg;
-  toast.classList.remove("hidden");
-  toast.classList.add("show");
-
-  setTimeout(() => {
-    toast.classList.remove("show");
-    toast.classList.add("hidden");
-  }, 3000);
-}
-
-    function openConfirmModal(cb) {
-  confirmCallback = cb;
-  document.getElementById("agreeCheck").checked = false;
-  document.getElementById("modalConfirmBtn").disabled = true;
-  document.getElementById("confirmModal").classList.remove("hidden");
-}
-
-function closeModal() {
-  document.getElementById("confirmModal").classList.add("hidden");
-}
-
-document.getElementById("agreeCheck").addEventListener("change", e => {
-  document.getElementById("modalConfirmBtn").disabled = !e.target.checked;
-});
-
-document.getElementById("modalConfirmBtn").addEventListener("click", () => {
-  closeModal();
-  if (confirmCallback) confirmCallback();
-});
-    </script>
-  </body>
+      // 4. แสดงตารางอ้างอิง
+      const tableBody = document.getElementById('reference-table-body');
+      tableBody.innerHTML = ''; // ล้างข้อมูลเก่า
+      
+      data.referenceTable.forEach(item => {
+        const row = tableBody.insertRow();
+        
+        // ถ้าวันที่ในตารางตรงกับวันที่ปัจจุบัน ให้เน้นแถวนั้น
+        if (item.day === todayDate) {
+          row.classList.add('highlight-row');
+        }
+        
+        // Cell 1: วันที่ชำระ
+        const dayCell = row.insertCell();
+        dayCell.textContent = item.day;
+        
+        // Cell 2: ค่าปรับ
+        const fineCell = row.insertCell();
+        fineCell.textContent = item.fine.toLocaleString('th-TH');
+      });
+    }
+  </script>
+</body>
 </html>
